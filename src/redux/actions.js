@@ -5,14 +5,26 @@ export const REQUESTED = 'requested';
 export const DISPLAY_USERS = 'users_ready';
 export const DISPLAY_COMMENTS = 'comments_ready';
 export const DISPLAY_POSTS = 'posts_ready';
-export const FILTER_CHANGED = 'new_filter';
+export const SHOW_POST = 'show_post';
+export const HIDE_POST = 'hide_post';
+export const CREATE_POST = 'create_post';
+
+export const CHANGE_NEW_POST_TITLE = 'change_new_post_title';
+export const CHANGE_NEW_POST_TEXT = 'change_new_post_text';
+
+export const SAVE_POST = 'save_post';
+export const CANCEL_SAVE_POST = 'save_post';
+
+
+
+
 export const SHOW_COMMENTS = 'show_comments';
 export const HIDE_COMMENTS = 'hide_comments';
 export const SHOW_AUTHOR = 'show_author';
 export const HIDE_AUTHOR = 'hide_author';
 export const FILL_DATA = 'fill_data';
 
- const url = 'https://jsonplaceholder.typicode.com/';
+const url = 'https://jsonplaceholder.typicode.com/';
 
 export function loadTodos() {
   return (dispatch) => {
@@ -72,7 +84,7 @@ export function loadTodos() {
     //
     //   const payloadPosts = {
     //     postsLoaded: true,
-    //     filteredPosts: posts,
+    //     posts: posts,
     //     posts,
     //   };
     //
@@ -115,7 +127,7 @@ export function fillData(data) {
 //     type: DISPLAY_POSTS,
 //     payload: {
 //           postsLoaded: true,
-//           filteredPosts: posts,
+//           posts: posts,
 //           posts,
 //     },
 //   };
@@ -133,7 +145,7 @@ export function fillData(data) {
 
 // export function filterChanged(payload) {
 //   return {
-//     type: FILTER_CHANGED,
+//     type: SHOW_POST,
 //     payload,
 //   };
 // }
@@ -166,12 +178,51 @@ export function hideModalAuthor() {
   };
 }
 
-// export function removeComment(id) {
-//   return {
-//     type: HIDE_COMMENTS,
-//     payload: id,
-//   };
-// }
+export function showPost(id) {
+  return {
+    type: SHOW_POST,
+    payload: id,
+  };
+}
+
+export function hidePost() {
+  return {
+    type: HIDE_POST,
+  };
+}
+
+export function createPost() {
+  return {
+    type: CREATE_POST,
+  };
+}
+
+export function changeNewPostTitle(value) {
+  return {
+    type: CHANGE_NEW_POST_TITLE,
+    payload: value,
+  };
+}
+
+export function changeNewPostText(value) {
+  return {
+    type: CHANGE_NEW_POST_TEXT,
+    payload: value,
+  };
+}
+
+export function savePost() {
+  return {
+    type: SAVE_POST,
+  };
+}
+
+export function cancelSavePost() {
+  return {
+    type: CANCEL_SAVE_POST,
+  };
+}
+
 
 // ------------------------------------------------------------------------
 // import { getData } from '../utils';

@@ -1,6 +1,6 @@
 import connect from 'react-redux/es/connect/connect';
 import { Post } from './Post';
- import {showModalAuthor, showModalComments} from '../redux/actions';
+ import {hidePost, showModalAuthor, showModalComments, showPost} from '../redux/actions';
 
 function mapStateToProps(state) {
   return {
@@ -14,7 +14,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     showModalComments: (id) => dispatch(showModalComments(id)),
-    showModalAuthor: (userId) => dispatch(showModalAuthor(userId))
+    showModalAuthor: (userId) => dispatch(showModalAuthor(userId)),
+    showPost: id => dispatch(showPost(id)),
+    hidePost: id => dispatch(hidePost(id)),
     // postItemRemove: index => dispatch(removePost(index)),
   };
 }

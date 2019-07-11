@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { PostHandler } from './PostHandler';
 import {ModalComments} from "./ModalComments";
 import {ModalAuthor} from "./ModalAuthor";
+import {cancelSavePost} from "../redux/actions";
 
 export class PostList extends Component  {
 
@@ -24,7 +25,7 @@ export class PostList extends Component  {
       commentsLoaded,
       filterChanged,
       handleClick,
-      filteredPosts,
+      posts,
         comments,
       modalCommentsVisible,
       modalAuthorVisible,
@@ -33,21 +34,85 @@ export class PostList extends Component  {
       currentUserId,
       hideModalComments,
       hideModalAuthor,
+      changeNewPostTitle,
+      changeNewPostText,
+      cancelSavePost,
+      showPost,
+      hidePost,
       usersMap,
+      chosenPostId,
+      postCreating,
+      createPost,
+      savePost,
     } = this.props;
+
+    if(postCreating){
+      return(
+          <>
+            <input
+                type="text"
+                placeholder="title"
+
+                 onChange={(event) => changeNewPostTitle(event)}
+            />
+            <input
+                type="text"
+                placeholder="text"
+
+                onChange={(event) => changeNewPostText(event)}
+            />
+            <button
+                type="button"
+                onClick={savePost}
+            >
+              Save
+            </button>
+            <button
+                type="button"
+                onClick={cancelSavePost}
+            >
+              Cancel
+            </button>
+          </>
+      )
+    }
+
+    if(chosenPostId) {
+        const post = posts.filter(postItem => postItem.id === chosenPostId);
+        const commentItems = comments.map(
+            commentItem => commentItem.postId === post[0].id
+            ? <li><h3>{commentItem.title}</h3><span>{commentItem.body}</span></li>
+                : null
+        );
+
+
+      return(
+          <>
+            <h1>{post[0].title}</h1>
+            <p>{post[0].body}</p>
+            <ul>{commentItems}</ul>
+            <button
+                type="button"
+                onClick={hidePost}
+            >
+              Back to posts
+            </button>
+          </>
+      )
+    }
 
 
     if (!requested) {
-      return (
-          <button
-              type="button"
-              onClick={handleClick}
-          >
-            Download posts!
-          </button>
-      );
+      // return (
+      //     <button
+      //         type="button"
+      //         onClick={handleClick}
+      //     >
+      //       Download posts!
+      //     </button>
+      // );
     } if (usersLoaded && postsLoaded && commentsLoaded) {
-      const items = filteredPosts.map((post, index) => (
+      const items = posts.map((post, index) => (
           <PostHandler
               key={post.id}
               userId={post.userId}
@@ -60,11 +125,13 @@ export class PostList extends Component  {
 
       return (
           <div>
-            {/*<input*/}
-            {/*    type="text"*/}
-            {/*    placeholder="search by title"*/}
-            {/*    onChange={filterChanged}*/}
-            {/*/>*/}
+
+            <button
+                type="button"
+                onClick={createPost}
+            >
+              Create Post
+            </button>
 
             <ModalAuthor
                 currentUserId={currentUserId}
@@ -111,7 +178,7 @@ export class PostList extends Component  {
 //     commentsLoaded,
 //     filterChanged,
 //     handleClick,
-//     filteredPosts,
+//     posts,
 //   } = props;
 //   if (!requested) {
 //     return (
@@ -123,7 +190,7 @@ export class PostList extends Component  {
 //       </button>
 //     );
 //   } if (usersLoaded && postsLoaded && commentsLoaded) {
-//     const items = filteredPosts.map((post, index) => (
+//     const items = posts.map((post, index) => (
 //       <PostHandler
 //         key={post.id}
 //         userId={post.userId}
@@ -168,9 +235,9 @@ export class PostList extends Component  {
 //   commentsLoaded: PropTypes.bool.isRequired,
 //   filterChanged: PropTypes.func.isRequired,
 //   handleClick: PropTypes.func.isRequired,
-//   filteredPosts: PropTypes.arrayOf(PropTypes.object),
+//   posts: PropTypes.arrayOf(PropTypes.object),
 // };
 //
 // PostList.defaultProps = {
-//   filteredPosts: null,
+//   posts: null,
 // };

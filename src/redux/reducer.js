@@ -3,10 +3,18 @@ import {
   DISPLAY_USERS,
   DISPLAY_COMMENTS,
   DISPLAY_POSTS,
-  FILTER_CHANGED,
+  CREATE_POST,
+  SHOW_POST,
+  HIDE_POST,
   SHOW_COMMENTS,
   HIDE_COMMENTS,
-  FILL_DATA, SHOW_AUTHOR, HIDE_AUTHOR,
+  FILL_DATA,
+  SHOW_AUTHOR,
+  HIDE_AUTHOR,
+  CHANGE_NEW_POST_TITLE,
+  CHANGE_NEW_POST_TEXT,
+  SAVE_POST,
+  CANCEL_SAVE_POST,
 } from './actions';
 
 const initialState = {
@@ -15,13 +23,17 @@ const initialState = {
   postsLoaded: false,
   commentsLoaded: false,
   usersMap: null,
-  posts: null,
   comments: null,
-  filteredPosts: null,
+  posts: null,
   currentPostId : null,
   currentUserId : null,
   modalCommentsVisible: null,
   modalAuthorVisible: null,
+  chosenPostId: null,
+  postCreating: null,
+  newPostTitle: '',
+  newPostText: '',
+  savedPosts: null,
 };
 
 const actionHandlers = {
@@ -39,7 +51,6 @@ const actionHandlers = {
         commentsLoaded: true,
         comments: action.payload.comments,
       postsLoaded: true,
-      filteredPosts: posts,
       posts,
     }
   },
@@ -63,6 +74,45 @@ const actionHandlers = {
     modalAuthorVisible : false,
     currentUserId: null,
   }),
+  [SHOW_POST]: (state, action) => ({
+    ...state,
+    chosenPostId: action.payload,
+  }),
+  [HIDE_POST]: state => ({
+    ...state,
+    chosenPostId: null,
+  }),
+  [CREATE_POST]: state => ({
+    ...state,
+    postCreating: true,
+  }),
+
+  [CHANGE_NEW_POST_TITLE]: (state, action) => ({
+    ...state,
+    newPostTitle: action.payload,
+  }),
+
+  [CHANGE_NEW_POST_TEXT]: (state, action) => ({
+    ...state,
+    newPostText: action.payload,
+  }),
+  [SAVE_POST]: state => ({
+    ...state,
+    savedPosts: {
+      userId : 1,
+      title: state.newPostTitle,
+      text: state.newPostText,
+    },
+    newPostTitle: '',
+    newPostText: '',
+    postCreating: null,
+  }),
+  [CANCEL_SAVE_POST]: state => ({
+    ...state,
+    newPostTitle: '',
+    newPostText: '',
+    postCreating: null,
+  }),
 
   // [DISPLAY_USERS]: (state, action) => ({
   //   ...state,
@@ -80,19 +130,19 @@ const actionHandlers = {
   //   return {
   //     ...state,
   //     postsLoaded: true,
-  //     filteredPosts: posts,
+  //     posts: posts,
   //     posts,
   //   };
   // },
-  // [FILTER_CHANGED]: (state, action) => ({
+  // [SHOW_POST]: (state, action) => ({
   //   ...state,
-  //   filteredPosts: state.posts.filter(post => post.title
+  //   posts: state.posts.filter(post => post.title
   //     .includes(action.payload)),
   // }),
   // [SHOW_COMMENTS]: (state, action) => ({
   //   ...state,
   //   posts: state.posts.filter((todo, index) => index !== action.payload),
-  //   filteredPosts: state.posts
+  //   posts: state.posts
   //     .filter((todo, index) => index !== action.payload),
   // }),
   // [HIDE_COMMENTS]: (state, action) => ({

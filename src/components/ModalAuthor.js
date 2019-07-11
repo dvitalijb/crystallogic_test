@@ -18,15 +18,7 @@ export class ModalAuthor extends Component  {
         } = this.props;
 
          const user = usersMap[currentUserId];
-        console.log( usersMap[currentUserId].name)
 
-
-        // const commentItems = comments.filter(comment => comment.postId === currentPostId);
-        // const commentItems = comments.map(
-        //     comment => comment.postId === currentPostId
-        //         ? <li>{comment.body}</li>
-        //         : null
-        // );
 
 
         return(
@@ -38,7 +30,7 @@ export class ModalAuthor extends Component  {
                 <div>
                     <h1>UserId {currentUserId}</h1>
 
-                    {/*<User user={user} />*/}
+                    {currentUserId ? <User user={user} /> : null}
                     {/*<CommentList*/}
                     {/*     comments={commentItems}*/}
                     {/*/>*/}

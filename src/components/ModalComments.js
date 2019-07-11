@@ -17,6 +17,7 @@ export class ModalComments extends Component  {
             hideModalComments
         } = this.props;
 
+
         // const commentItems = comments.filter(comment => comment.postId === currentPostId);
         const commentItems = comments.map(
             comment => comment.postId === currentPostId

@@ -14,6 +14,8 @@ export function Post(props) {
     postItemRemove,
     modalCommentsVisible,
       modalAuthorVisible,
+      showPost,
+      hidePost,
     showModalComments,
       showModalAuthor,
     usersMap,
@@ -34,7 +36,10 @@ export function Post(props) {
         {id}
       </td>
       <td>
-        <PostTitle title={title}/>
+          <a href="#"
+              onClick={() =>showPost(id)}
+          >{title}</a>
+
 
       </td>
       <td>

@@ -21,7 +21,7 @@ export async function loadData() {
 
   // const payloadPosts = {
   //   postsLoaded: true,
-  //   filteredPosts: posts,
+  //   posts: posts,
   //   posts,
   // };
   //
