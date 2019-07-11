@@ -1,17 +1,21 @@
 import connect from 'react-redux/es/connect/connect';
 import { Post } from './Post';
-import { removePost } from '../redux/actions';
+ import {showModalAuthor, showModalComments} from '../redux/actions';
 
 function mapStateToProps(state) {
   return {
     comments: state.comments,
     usersMap: state.usersMap,
+    modalCommentsVisible : state.modalCommentsVisible,
+    modalAuthorVisible: state.modalAuthorVisible,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    postItemRemove: index => dispatch(removePost(index)),
+    showModalComments: (id) => dispatch(showModalComments(id)),
+    showModalAuthor: (userId) => dispatch(showModalAuthor(userId))
+    // postItemRemove: index => dispatch(removePost(index)),
   };
 }
 

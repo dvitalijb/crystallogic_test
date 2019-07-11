@@ -6,8 +6,10 @@ export const DISPLAY_USERS = 'users_ready';
 export const DISPLAY_COMMENTS = 'comments_ready';
 export const DISPLAY_POSTS = 'posts_ready';
 export const FILTER_CHANGED = 'new_filter';
-export const POST_ITEM_REMOVE = 'post_remove';
-export const COMMENT_ITEM_REMOVE = 'comment_remove';
+export const SHOW_COMMENTS = 'show_comments';
+export const HIDE_COMMENTS = 'hide_comments';
+export const SHOW_AUTHOR = 'show_author';
+export const HIDE_AUTHOR = 'hide_author';
 export const FILL_DATA = 'fill_data';
 
  const url = 'https://jsonplaceholder.typicode.com/';
@@ -24,7 +26,6 @@ export function loadTodos() {
       getData(`${url}comments`),
     ])
       .then(([posts, users, comments]) => {
-        console.log([posts, users, comments])
         dispatch(fillData({posts, users, comments}));
 
       });
@@ -130,26 +131,47 @@ export function fillData(data) {
 //   };
 // }
 
-export function filterChanged(payload) {
+// export function filterChanged(payload) {
+//   return {
+//     type: FILTER_CHANGED,
+//     payload,
+//   };
+// }
+
+export function showModalComments(currentPostId) {
+
   return {
-    type: FILTER_CHANGED,
-    payload,
+    type: SHOW_COMMENTS,
+    payload: currentPostId,
   };
 }
 
-export function removePost(index) {
+export function hideModalComments() {
   return {
-    type: POST_ITEM_REMOVE,
-    payload: index,
+    type: HIDE_COMMENTS,
   };
 }
 
-export function removeComment(id) {
+export function showModalAuthor(currentUserId) {
+
   return {
-    type: COMMENT_ITEM_REMOVE,
-    payload: id,
+    type: SHOW_AUTHOR,
+    payload: currentUserId,
   };
 }
+
+export function hideModalAuthor() {
+  return {
+    type: HIDE_AUTHOR,
+  };
+}
+
+// export function removeComment(id) {
+//   return {
+//     type: HIDE_COMMENTS,
+//     payload: id,
+//   };
+// }
 
 // ------------------------------------------------------------------------
 // import { getData } from '../utils';

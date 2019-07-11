@@ -1,6 +1,6 @@
 import connect from 'react-redux/es/connect/connect';
 import { PostList } from './PostList';
-import { filterChanged, loadTodos } from '../redux/actions';
+import {hideModalAuthor, hideModalComments, loadTodos, showModalAuthor, showModalComments} from '../redux/actions';
 
 function mapStateToProps(state) {
   return {
@@ -10,13 +10,23 @@ function mapStateToProps(state) {
     commentsLoaded: state.commentsLoaded,
     posts: state.posts,
     filteredPosts: state.filteredPosts,
+    comments: state.comments,
+    modalCommentsVisible : state.modalCommentsVisible,
+    modalAuthorVisible: state.modalAuthorVisible,
+    currentPostId: state.currentPostId,
+    currentUserId: state.currentUserId,
+    usersMap: state.usersMap,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     handleClick: () => dispatch(loadTodos()),
-    filterChanged: event => dispatch(filterChanged(event.target.value)),
+    showModalComments: id => dispatch(showModalComments(id)),
+    hideModalComments: () => dispatch(hideModalComments()),
+    showModalAuthor: userId => dispatch(showModalAuthor(userId)),
+    hideModalAuthor: () => dispatch(hideModalAuthor()),
+    // filterChanged: event => dispatch(filterChanged(event.target.value)),
   };
 }
 

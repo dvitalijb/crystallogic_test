@@ -3,6 +3,7 @@ import { CommentHandler } from './CommentHandler';
 
 export function CommentList(props) {
   return props.comments.map(item => (
+
     <CommentHandler
       key={item.id}
       commentAuthorName={item.name}

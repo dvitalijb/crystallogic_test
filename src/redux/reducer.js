@@ -4,9 +4,9 @@ import {
   DISPLAY_COMMENTS,
   DISPLAY_POSTS,
   FILTER_CHANGED,
-  POST_ITEM_REMOVE,
-  COMMENT_ITEM_REMOVE,
-  FILL_DATA,
+  SHOW_COMMENTS,
+  HIDE_COMMENTS,
+  FILL_DATA, SHOW_AUTHOR, HIDE_AUTHOR,
 } from './actions';
 
 const initialState = {
@@ -18,6 +18,10 @@ const initialState = {
   posts: null,
   comments: null,
   filteredPosts: null,
+  currentPostId : null,
+  currentUserId : null,
+  modalCommentsVisible: null,
+  modalAuthorVisible: null,
 };
 
 const actionHandlers = {
@@ -26,7 +30,6 @@ const actionHandlers = {
     requested: true,
   }),
   [FILL_DATA]:(state, action) => {
-    console.log(action);
        const { posts } = action.payload;
     return {
       ...state,
@@ -39,10 +42,28 @@ const actionHandlers = {
       filteredPosts: posts,
       posts,
     }
-
-
-
   },
+  [SHOW_COMMENTS]: (state, action) => ({
+    ...state,
+    modalCommentsVisible : true,
+    currentPostId: action.payload,
+  }),
+  [HIDE_COMMENTS]: state => ({
+    ...state,
+    modalCommentsVisible : false,
+    currentPostId: null,
+  }),
+  [SHOW_AUTHOR]: (state, action) => ({
+    ...state,
+    modalAuthorVisible : true,
+    currentUserId: action.payload,
+  }),
+  [HIDE_AUTHOR]: state => ({
+    ...state,
+    modalAuthorVisible : false,
+    currentUserId: null,
+  }),
+
   // [DISPLAY_USERS]: (state, action) => ({
   //   ...state,
   //   usersLoaded: true,
@@ -68,13 +89,13 @@ const actionHandlers = {
   //   filteredPosts: state.posts.filter(post => post.title
   //     .includes(action.payload)),
   // }),
-  // [POST_ITEM_REMOVE]: (state, action) => ({
+  // [SHOW_COMMENTS]: (state, action) => ({
   //   ...state,
   //   posts: state.posts.filter((todo, index) => index !== action.payload),
   //   filteredPosts: state.posts
   //     .filter((todo, index) => index !== action.payload),
   // }),
-  // [COMMENT_ITEM_REMOVE]: (state, action) => ({
+  // [HIDE_COMMENTS]: (state, action) => ({
   //   ...state,
   //   comments: state.comments.filter(todo => todo.id !== action.payload),
   // }),
