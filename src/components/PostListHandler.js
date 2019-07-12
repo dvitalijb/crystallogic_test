@@ -3,7 +3,7 @@ import { PostList } from './PostList';
 import {
   cancelSavePost,
   changeNewPostText,
-  changeNewPostTitle,
+  changeNewPostTitle, changePage,
   createPost,
   hideModalAuthor,
   hideModalComments, hidePost,
@@ -29,6 +29,7 @@ function mapStateToProps(state) {
     usersMap: state.usersMap,
     chosenPostId: state.chosenPostId,
     postCreating: state.postCreating,
+    activePage: state.activePage,
   };
 }
 
@@ -45,7 +46,8 @@ function mapDispatchToProps(dispatch) {
     changeNewPostTitle: (event) => dispatch(changeNewPostTitle(event.target.value)),
     changeNewPostText: (event) => dispatch(changeNewPostText(event.target.value)),
     savePost: () => dispatch(savePost()),
-    cancelSavePost: () => cancelSavePost(savePost()),
+    cancelSavePost: () => dispatch(cancelSavePost()),
+    changePage: index => dispatch(changePage(index)),
   };
 }
 

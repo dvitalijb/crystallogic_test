@@ -14,7 +14,7 @@ import {
   CHANGE_NEW_POST_TITLE,
   CHANGE_NEW_POST_TEXT,
   SAVE_POST,
-  CANCEL_SAVE_POST,
+  CANCEL_SAVE_POST, CHANGE_PAGE,
 } from './actions';
 
 const initialState = {
@@ -34,6 +34,7 @@ const initialState = {
   newPostTitle: '',
   newPostText: '',
   savedPosts: null,
+  activePage:1,
 };
 
 const actionHandlers = {
@@ -112,6 +113,10 @@ const actionHandlers = {
     newPostTitle: '',
     newPostText: '',
     postCreating: null,
+  }),
+  [CHANGE_PAGE]: (state, action) => ({
+    ...state,
+    activePage: action.payload,
   }),
 
   // [DISPLAY_USERS]: (state, action) => ({

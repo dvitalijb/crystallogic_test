@@ -4,6 +4,9 @@ import { PostHandler } from './PostHandler';
 import {ModalComments} from "./ModalComments";
 import {ModalAuthor} from "./ModalAuthor";
 import {cancelSavePost} from "../redux/actions";
+import Pagination from "react-js-pagination";
+import {getActivePosts} from "../utils";
+
 
 export class PostList extends Component  {
 
@@ -37,6 +40,7 @@ export class PostList extends Component  {
       changeNewPostTitle,
       changeNewPostText,
       cancelSavePost,
+        changePage,
       showPost,
       hidePost,
       usersMap,
@@ -44,7 +48,35 @@ export class PostList extends Component  {
       postCreating,
       createPost,
       savePost,
+        activePage,
     } = this.props;
+let pageItems;
+      let numberPages;
+    if(posts){
+
+         numberPages = Math.ceil(posts.length/10);
+        const displayPages = new Array(numberPages).fill(1);
+
+        pageItems = displayPages.map(
+            (displayPage, index) => {
+                const numberPage = index + 1;
+                return activePage === numberPage
+                ? <span onClick={()=>changePage(numberPage)}><b>{numberPage}</b></span>
+                : <span onClick={()=>changePage(numberPage)}>{numberPage}</span>}
+        )
+
+    }
+
+
+
+    // let page = 1;
+    // const pageItems = [];
+    // while (page <= pages){
+    //     if(activePage === page)
+    //     pageItems.push(<span>{page}</span>)
+    //     page++;
+    // }
+    // const pageItems = pages.map(page => )
 
     if(postCreating){
       return(
@@ -112,7 +144,12 @@ export class PostList extends Component  {
       //     </button>
       // );
     } if (usersLoaded && postsLoaded && commentsLoaded) {
-      const items = posts.map((post, index) => (
+
+        const activePosts = getActivePosts(posts, 10, activePage);
+
+
+
+      const items = activePosts.map((post, index) => (
           <PostHandler
               key={post.id}
               userId={post.userId}
@@ -160,6 +197,7 @@ export class PostList extends Component  {
               {items}
               </tbody>
             </table>
+              {pageItems}
           </div>
       );
     }

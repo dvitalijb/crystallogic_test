@@ -16,6 +16,12 @@ export const SAVE_POST = 'save_post';
 export const CANCEL_SAVE_POST = 'save_post';
 
 
+export const CHANGE_PAGE = 'change_page';
+
+
+
+
+
 
 
 export const SHOW_COMMENTS = 'show_comments';
@@ -220,6 +226,13 @@ export function savePost() {
 export function cancelSavePost() {
   return {
     type: CANCEL_SAVE_POST,
+  };
+}
+
+export function changePage(numberPage) {
+  return {
+    type: CHANGE_PAGE,
+    payload: numberPage,
   };
 }
 
