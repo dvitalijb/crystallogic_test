@@ -13,16 +13,16 @@ export function Post(props) {
     return (
         <tr>
             <td>
-                {id}
+                <span>{id}</span>
             </td>
             <td>
-                <button onClick={() => showPost(id)}>{title}</button>
+                <p className="title" onClick={() => showPost(id)}>{title}</p>
             </td>
             <td>
-                <button onClick={() => showModalComments(id)}>Comments</button>
+                <p className="title" onClick={() => showModalComments(id)}>Comments</p>
             </td>
             <td>
-                <button onClick={() => showModalAuthor(userId)}>Author {props.userId}</button>
+                <p className="title" onClick={() => showModalAuthor(userId)}>Author {props.userId}</p>
             </td>
         </tr>
     );

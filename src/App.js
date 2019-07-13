@@ -5,9 +5,8 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { reducer } from './redux/reducer';
 import { PostListHandler } from './components/PostListHandler';
-import {logger} from "redux-logger";
 
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 function App() {
   return (

@@ -77,9 +77,6 @@ export class PostList extends Component {
 
             return (
                 <div>
-                    <button type="button" onClick={createPost}>
-                        Create Post
-                    </button>
                     <ModalAuthor
                         isModalAuthorVisible={isModalAuthorVisible}
                         hideModalAuthor={hideModalAuthor}
@@ -92,7 +89,14 @@ export class PostList extends Component {
                         currentPostId={currentPostId}
                         comments={comments}
                     />
-                    <table>
+                    <button
+                        type="button"
+                        className="button"
+                        onClick={createPost}
+                    >
+                        Create Post
+                    </button>
+                    <table className="table">
                         <thead>
                         <tr>
                             <th>Id</th>
@@ -105,16 +109,18 @@ export class PostList extends Component {
                             {postItems}
                         </tbody>
                     </table>
-                    <Pagination
-                        posts={posts}
-                        activePage={activePage}
-                        changePage={changePage}
-                    />
+                    <section className="pagination">
+                        <Pagination
+                            posts={posts}
+                            activePage={activePage}
+                            changePage={changePage}
+                        />
+                    </section>
                 </div>
             );
         }
         return (
-            <button type="button" disabled>Loading...</button>
+            <h1 className="loading">Loading...</h1>
         );
     }
 }
