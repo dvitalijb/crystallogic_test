@@ -1,5 +1,4 @@
 import {
-  REQUESTED,
   CREATE_POST,
   SHOW_POST,
   HIDE_POST,
@@ -15,18 +14,14 @@ import {
 } from './actions';
 
 const initialState = {
-  requested: false,
-  usersLoaded: false,
-  postsLoaded: false,
-  commentsLoaded: false,
+  dataLoaded: false,
   usersMap: null,
   comments: null,
   posts: null,
   currentPostId : null,
   currentUserId : null,
-  modalCommentsVisible: null,
-  modalAuthorVisible: null,
-  chosenPostId: null,
+  isModalCommentsVisible: false,
+  isModalAuthorVisible: false,
   postCreating: null,
   newPostTitle: '',
   newPostText: '',
@@ -35,50 +30,42 @@ const initialState = {
 };
 
 const actionHandlers = {
-  [REQUESTED]: state => ({
-    ...state,
-    requested: true,
-  }),
-  [FILL_DATA]:(state, action) => {
-       const { posts } = action.payload;
-    return {
+  [FILL_DATA]:(state, action) => ({
       ...state,
-      usersLoaded: true,
+      dataLoaded: true,
       usersMap: action.payload.users
           .reduce((acc, user) => ({ ...acc, [user.id]: user }), {}),
-        commentsLoaded: true,
-        comments: action.payload.comments,
-      postsLoaded: true,
-      posts,
-    }
-  },
+    comments: action.payload.comments,
+      posts: action.payload.posts,
+
+  }),
   [SHOW_COMMENTS]: (state, action) => ({
     ...state,
-    modalCommentsVisible : true,
+    isModalCommentsVisible : true,
     currentPostId: action.payload,
   }),
   [HIDE_COMMENTS]: state => ({
     ...state,
-    modalCommentsVisible : false,
+    isModalCommentsVisible : false,
     currentPostId: null,
   }),
   [SHOW_AUTHOR]: (state, action) => ({
     ...state,
-    modalAuthorVisible : true,
+    isModalAuthorVisible : true,
     currentUserId: action.payload,
   }),
   [HIDE_AUTHOR]: state => ({
     ...state,
-    modalAuthorVisible : false,
+    isModalAuthorVisible : false,
     currentUserId: null,
   }),
   [SHOW_POST]: (state, action) => ({
     ...state,
-    chosenPostId: action.payload,
+    currentPostId: action.payload,
   }),
   [HIDE_POST]: state => ({
     ...state,
-    chosenPostId: null,
+    currentPostId: null,
   }),
   [CREATE_POST]: state => ({
     ...state,
@@ -118,7 +105,6 @@ const actionHandlers = {
 };
 
 export const reducer = (state = initialState, action) => {
-
   const handler = actionHandlers[action.type];
   return handler
     ? handler(state, action)

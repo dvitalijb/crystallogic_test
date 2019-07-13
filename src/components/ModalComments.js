@@ -1,49 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Modal from 'react-awesome-modal';
-import {CommentList} from "./CommentList";
+import { CommentList } from "./CommentList";
 
-export class ModalComments extends Component  {
+export function ModalComments(props) {
+    const {
+        isModalCommentsVisible,
+        hideModalComments,
+        currentPostId,
+        comments,
+    } = props;
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const {
-            comments,
-            id,
-            currentPostId,
-            modalCommentsVisible,
-            hideModalComments
-        } = this.props;
-
-
-        // const commentItems = comments.filter(comment => comment.postId === currentPostId);
-        const commentItems = comments.map(
-            comment => comment.postId === currentPostId
-                ? <li>{comment.body}</li>
-                : null
-        );
-
-        return(
-            <Modal
-                 visible={modalCommentsVisible}
-                width="70%" height="70%" effect="fadeInLeft"
-                onClickAway={() => hideModalComments()}
-            >
-                <div>
-                    <h1>PostId {currentPostId}</h1>
-                    <ul>
-                        {commentItems}
-                    </ul>
-                    {/*<CommentList*/}
-                    {/*     comments={commentItems}*/}
-                    {/*/>*/}
-                    <a href="#"
-                        onClick={() => hideModalComments()}
-                    >Close</a>
-                </div>
-            </Modal>
-        )
-    }
+    return (
+        <Modal
+            visible={isModalCommentsVisible}
+            width="70%" height="70%" effect="fadeInLeft"
+            onClickAway={() => hideModalComments()}
+        >
+            <div>
+                <h1>PostId {currentPostId}</h1>
+                <CommentList
+                    comments={comments}
+                    currentPostId={currentPostId}
+                />
+                <button onClick={() => hideModalComments()}>
+                    Close
+                </button>
+            </div>
+        </Modal>
+    )
 }

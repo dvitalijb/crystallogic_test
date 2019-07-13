@@ -1,14 +1,14 @@
 import React from 'react';
-import { CommentHandler } from './CommentHandler';
+import { Comment } from "./Comment";
 
 export function CommentList(props) {
-  return props.comments.map(item => (
+    const {comments, currentPostId} = props;
 
-    <CommentHandler
-      key={item.id}
-      commentAuthorName={item.name}
-      body={item.body}
-      id={item.id}
-    />
-  ));
+    return (
+        comments.map(
+            comment => comment.postId === currentPostId
+                ? <Comment key={comment.id} body={comment.body} title={comment.title}/>
+                : null
+        )
+    );
 }

@@ -1,10 +1,5 @@
-import { loadData } from './loadData';
 import { getData } from '../utils';
 
-export const REQUESTED = 'requested';
-export const DISPLAY_USERS = 'users_ready';
-export const DISPLAY_COMMENTS = 'comments_ready';
-export const DISPLAY_POSTS = 'posts_ready';
 export const SHOW_POST = 'show_post';
 export const HIDE_POST = 'hide_post';
 export const CREATE_POST = 'create_post';
@@ -21,11 +16,8 @@ export const FILL_DATA = 'fill_data';
 
 const url = 'https://jsonplaceholder.typicode.com/';
 
-export function loadTodos() {
+export function loadData() {
   return (dispatch) => {
-    dispatch({
-      type: 'requested',
-    });
 
     Promise.all([
       getData(`${url}posts`),
@@ -34,7 +26,6 @@ export function loadTodos() {
     ])
       .then(([posts, users, comments]) => {
         dispatch(fillData({posts, users, comments}));
-
       });
   };
 }
@@ -46,11 +37,11 @@ export function fillData(data) {
   }
 }
 
-export function showModalComments(currentPostId) {
+export function showModalComments(postId) {
 
   return {
     type: SHOW_COMMENTS,
-    payload: currentPostId,
+    payload: postId,
   };
 }
 
@@ -60,11 +51,11 @@ export function hideModalComments() {
   };
 }
 
-export function showModalAuthor(currentUserId) {
+export function showModalAuthor(userId) {
 
   return {
     type: SHOW_AUTHOR,
-    payload: currentUserId,
+    payload: userId,
   };
 }
 
@@ -74,10 +65,10 @@ export function hideModalAuthor() {
   };
 }
 
-export function showPost(id) {
+export function showPost(postId) {
   return {
     type: SHOW_POST,
-    payload: id,
+    payload: postId,
   };
 }
 
@@ -126,47 +117,3 @@ export function changePage(numberPage) {
     payload: numberPage,
   };
 }
-
-
-// ------------------------------------------------------------------------
-// import { getData } from '../utils';
-//
-// export const DATA_REQUESTED = 'dataRequested';
-// export const DATA_LOADED = 'dataLoaded';
-//
-// export const dataRequested = () => {
-//   return dispatch => {
-//     dispatch({
-//       type: DATA_REQUESTED
-//     });
-//     Promise.all([
-//       getData('https://jsonplaceholder.typicode.com/posts'),
-//       getData('https://jsonplaceholder.typicode.com/users'),
-//       getData('https://jsonplaceholder.typicode.com/comments')
-//     ])
-//         .then(([posts, users, comments]) => {
-//           const commentsMap = {};
-//           comments.forEach(el => {
-//             commentsMap[el.postId] ? commentsMap[el.postId].push(el) : commentsMap[el.postId] = [el];
-//           });
-//
-//           const usersMap = users.reduce((acc, user) => ({ ...acc, [user.id]: user }), {});
-//
-//           const postsList = posts.map(post => ({
-//             ...post, comments: commentsMap[post.id], user: usersMap[post.userId]
-//           }))
-//
-//           dispatch({
-//             type: DATA_LOADED,
-//             payload: postsList
-//           });
-//         })
-//   }
-// }
-//
-// export const dataLoaded = (payload) => ({
-//   type: DATA_LOADED,
-//   payload
-// })
-//
-// }
