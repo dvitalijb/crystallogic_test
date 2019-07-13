@@ -8,22 +8,11 @@ export const DISPLAY_POSTS = 'posts_ready';
 export const SHOW_POST = 'show_post';
 export const HIDE_POST = 'hide_post';
 export const CREATE_POST = 'create_post';
-
 export const CHANGE_NEW_POST_TITLE = 'change_new_post_title';
 export const CHANGE_NEW_POST_TEXT = 'change_new_post_text';
-
 export const SAVE_POST = 'save_post';
-export const CANCEL_SAVE_POST = 'save_post';
-
-
+export const CANCEL_SAVE_POST = 'cancel_save_post';
 export const CHANGE_PAGE = 'change_page';
-
-
-
-
-
-
-
 export const SHOW_COMMENTS = 'show_comments';
 export const HIDE_COMMENTS = 'hide_comments';
 export const SHOW_AUTHOR = 'show_author';
@@ -47,66 +36,6 @@ export function loadTodos() {
         dispatch(fillData({posts, users, comments}));
 
       });
-
-
-    // const resultResponse =  loadData();
-    // resultResponse.then(rsp=>{
-    //   console.log(rsp)
-    //   dispatch(displayUsers(rsp.users));
-    //   dispatch(displayPosts(rsp.posts));
-    //   dispatch(displayComments(rsp.comments));
-    // })
-    // dispatch(displayUsers(resultResponse.payloadUsers));
-    // dispatch(displayPosts(resultResponse.payloadPosts));
-    // dispatch(displayComments(resultResponse.payloadComments));
-
-    // const respUsers = displayUsers();
-    // const respPost = displayPosts();
-    // const respCom = displayComments()
-    //
-    // dispatch(respUsers);
-    // dispatch(respPost);
-    // dispatch(respCom);
-
-    // loadData();
-    // async function loadData() {
-    //   const url = 'https://jsonplaceholder.typicode.com/';
-    //   const postsPromise = fetch(`${url}posts`);
-    //   const usersPromise = fetch(`${url}users`);
-    //   const commentsPromise = fetch(`${url}comments`);
-    //   const [
-    //     postsResponse,
-    //     usersResponse,
-    //     commentsResponse,
-    //   ] = await Promise.all([
-    //     postsPromise,
-    //     usersPromise,
-    //     commentsPromise,
-    //   ]);
-    //
-    //   const posts = await postsResponse.json();
-    //   const users = await usersResponse.json();
-    //   const comments = await commentsResponse.json();
-    //
-    //   const payloadPosts = {
-    //     postsLoaded: true,
-    //     posts: posts,
-    //     posts,
-    //   };
-    //
-    //   const payloadUsers = {
-    //     usersLoaded: true,
-    //     users,
-    //   };
-    //
-    //   const payloadComments = {
-    //     commentsLoaded: true,
-    //     comments,
-    //   };
-    //   dispatch(displayUsers(payloadUsers));
-    //   dispatch(displayPosts(payloadPosts));
-    //   dispatch(displayComments(payloadComments));
-    // }
   };
 }
 
@@ -116,45 +45,6 @@ export function fillData(data) {
     payload: data,
   }
 }
-
-
-// export function displayUsers(users) {
-//   return {
-//     type: DISPLAY_USERS,
-//     payload: {
-//           usersLoaded: true,
-//           users,
-//     },
-//   };
-// }
-//
-// export function displayPosts(posts) {
-//   return {
-//     type: DISPLAY_POSTS,
-//     payload: {
-//           postsLoaded: true,
-//           posts: posts,
-//           posts,
-//     },
-//   };
-// }
-//
-// export async function displayComments(comments) {
-//   return {
-//     type: DISPLAY_COMMENTS,
-//     payload: {
-//       commentsLoaded: true,
-//       comments,
-//     },
-//   };
-// }
-
-// export function filterChanged(payload) {
-//   return {
-//     type: SHOW_POST,
-//     payload,
-//   };
-// }
 
 export function showModalComments(currentPostId) {
 
@@ -218,6 +108,7 @@ export function changeNewPostText(value) {
 }
 
 export function savePost() {
+  alert('Saved successful!');
   return {
     type: SAVE_POST,
   };

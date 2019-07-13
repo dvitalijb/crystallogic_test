@@ -49,7 +49,12 @@ export class PostList extends Component  {
       createPost,
       savePost,
         activePage,
+        newPostTitle,
+        newPostText,
     } = this.props;
+
+
+
 let pageItems;
       let numberPages;
     if(posts){
@@ -80,22 +85,29 @@ let pageItems;
 
     if(postCreating){
       return(
-          <>
+
+              <form>
             <input
                 type="text"
                 placeholder="title"
-
+                required
                  onChange={(event) => changeNewPostTitle(event)}
             />
             <input
                 type="text"
                 placeholder="text"
-
+                required
                 onChange={(event) => changeNewPostText(event)}
             />
             <button
                 type="button"
-                onClick={savePost}
+                onClick={()=>{
+                    if(newPostTitle.trim() !== '' && newPostText.trim() !== '' ){
+                       return savePost();
+                    }
+                    alert('please fill the empty fields')
+                }
+                }
             >
               Save
             </button>
@@ -105,7 +117,8 @@ let pageItems;
             >
               Cancel
             </button>
-          </>
+              </form>
+
       )
     }
 

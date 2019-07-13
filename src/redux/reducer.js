@@ -1,8 +1,5 @@
 import {
   REQUESTED,
-  DISPLAY_USERS,
-  DISPLAY_COMMENTS,
-  DISPLAY_POSTS,
   CREATE_POST,
   SHOW_POST,
   HIDE_POST,
@@ -33,8 +30,8 @@ const initialState = {
   postCreating: null,
   newPostTitle: '',
   newPostText: '',
-  savedPosts: null,
-  activePage:1,
+  newPost: null,
+  activePage: 1,
 };
 
 const actionHandlers = {
@@ -99,14 +96,14 @@ const actionHandlers = {
   }),
   [SAVE_POST]: state => ({
     ...state,
-    savedPosts: {
+    newPost: {
       userId : 1,
-      title: state.newPostTitle,
-      text: state.newPostText,
+      title: state.newPostTitle.trim(),
+      text: state.newPostText.trim(),
     },
     newPostTitle: '',
     newPostText: '',
-    postCreating: null,
+    postCreating: false,
   }),
   [CANCEL_SAVE_POST]: state => ({
     ...state,
@@ -118,42 +115,6 @@ const actionHandlers = {
     ...state,
     activePage: action.payload,
   }),
-
-  // [DISPLAY_USERS]: (state, action) => ({
-  //   ...state,
-  //   usersLoaded: true,
-  //   usersMap: action.payload.users
-  //     .reduce((acc, user) => ({ ...acc, [user.id]: user }), {}),
-  // }),
-  // [DISPLAY_COMMENTS]: (state, action) => ({
-  //   ...state,
-  //   commentsLoaded: true,
-  //   comments: action.payload.comments,
-  // }),
-  // [DISPLAY_POSTS]: (state, action) => {
-  //   const { posts } = action.payload;
-  //   return {
-  //     ...state,
-  //     postsLoaded: true,
-  //     posts: posts,
-  //     posts,
-  //   };
-  // },
-  // [SHOW_POST]: (state, action) => ({
-  //   ...state,
-  //   posts: state.posts.filter(post => post.title
-  //     .includes(action.payload)),
-  // }),
-  // [SHOW_COMMENTS]: (state, action) => ({
-  //   ...state,
-  //   posts: state.posts.filter((todo, index) => index !== action.payload),
-  //   posts: state.posts
-  //     .filter((todo, index) => index !== action.payload),
-  // }),
-  // [HIDE_COMMENTS]: (state, action) => ({
-  //   ...state,
-  //   comments: state.comments.filter(todo => todo.id !== action.payload),
-  // }),
 };
 
 export const reducer = (state = initialState, action) => {

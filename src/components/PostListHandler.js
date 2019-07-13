@@ -30,6 +30,8 @@ function mapStateToProps(state) {
     chosenPostId: state.chosenPostId,
     postCreating: state.postCreating,
     activePage: state.activePage,
+    newPostTitle: state.newPostTitle,
+    newPostText: state.newPostText,
   };
 }
 
