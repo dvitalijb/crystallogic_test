@@ -9,7 +9,7 @@ import {
 
 function mapStateToProps(state) {
   return {
-    isModalCommentsVisible : state.isModalCommentsVisible,
+    isModalCommentsVisible: state.isModalCommentsVisible,
     isModalAuthorVisible: state.isModalAuthorVisible,
     comments: state.comments,
     usersMap: state.usersMap,
@@ -18,8 +18,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    showModalAuthor: (userId) => dispatch(showModalAuthor(userId)),
-    showModalComments: (id) => dispatch(showModalComments(id)),
+    showModalAuthor: userId => dispatch(showModalAuthor(userId)),
+    showModalComments: id => dispatch(showModalComments(id)),
     showPost: postId => dispatch(showPost(postId)),
     hidePost: () => dispatch(hidePost()),
   };

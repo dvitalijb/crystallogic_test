@@ -1,11 +1,10 @@
 import React from 'react';
 
 export function Comment(props) {
-    const { title, body } = props;
-    return (
-        <li>
-            <p>{title}</p>
-            <span>{body}</span>
-        </li>
-    );
+  const { body } = props;
+  return (
+    <li>
+      <span>{body}</span>
+    </li>
+  );
 }

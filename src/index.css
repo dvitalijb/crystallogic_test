@@ -1,94 +1,112 @@
+:root {
+  --main-bg-color: #f2f2f2;
+  --main-button-color: #5b3f84;
+  --main-margin: 10px;
+}
 
 html,
 body {
-    font-family: 'Roboto', sans-serif;
-    width: 100%;
-    height: 100%;
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-    background-color: #F5F5F5;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-bg-color);
 }
 
-.loading{
-    color: #5B3F84;
+.loading {
+  color: var(--main-button-color);
 }
 
 .table {
-    text-align: center;
-    border-collapse: collapse;
-    width: 700px;
+  text-align: center;
+  border-collapse: collapse;
+  width: 700px;
 }
 
 .table td,
 .table th {
-
-    border: 1px solid #ddd;
-    padding: 8px;
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
 .table th:nth-child(2) {
-
-    width: 400px;
+  width: 400px;
 }
 
-.table tr:nth-child(even){background-color: #f2f2f2;}
+.table tr:nth-child(even) {
+  background-color: var(--main-bg-color);
+}
 
 .table tr:hover {
-    background-color: #5B3F84;
-    color: #F5F5F5;
+  background-color: var(--main-button-color);
+  color: var(--main-bg-color);
 }
 
 .table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    background-color: #5B3F84;
-    color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: var(--main-button-color);
+  color: white;
 }
 
 .button {
-    border-radius: 8px;
-    border: 3px solid #5B3F84;
-    color: #F5F5F5;
-    background-color: #5B3F84;
-    outline: none;
-    font-weight: bold;
+  border-radius: 8px;
+  border: 3px solid var(--main-button-color);
+  color: var(--main-bg-color);
+  background-color: var(--main-button-color);
+  outline: none;
+  font-weight: bold;
 }
 
 .button:hover,
-.title:hover{
-    cursor: pointer;
-
+.title:hover {
+  cursor: pointer;
 }
 
 .title {
-    margin: 0;
+  margin: 0;
 }
 
-.pagination{
-    margin:5px;
-    text-align: center;
-
+.pagination {
+  margin: var(--main-margin);
+  text-align: center;
 }
 
 .active {
-    width: 40px;
-    height: 40px;
-    background-color: #F5F5F5;
-    color: #000;
+  width: 40px;
+  height: 40px;
+  background-color: var(--main-bg-color);
+  color: #000;
 }
 
 .form_button {
-    display: flex;
-    justify-content: space-around;
-    margin: 10px;
+  display: flex;
+  justify-content: space-around;
+  margin: var(--main-margin);
 }
 
 .input {
-    margin: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 3px solid #5B3F84;
-    outline: none;
+  margin: var(--main-margin);
+  padding: 5px;
+  border-radius: 5px;
+  border: 3px solid var(--main-button-color);
+  outline: none;
+}
+
+.postComments {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.modal {
+  text-align: center;
+}
+
+.createPost,
+.modal .button,
+.postComments .button {
+  display: block;
+  margin: var(--main-margin) auto;
 }
