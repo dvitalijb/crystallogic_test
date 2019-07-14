@@ -79,6 +79,7 @@ body {
   height: 40px;
   background-color: var(--main-bg-color);
   color: #000;
+  font-size: large;
 }
 
 .form_button {
